@@ -1,2 +1,2 @@
 # zeo
-Zeo Roblox Util Libary
+Zeo Roblox Util Library
