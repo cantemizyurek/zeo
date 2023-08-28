@@ -22,8 +22,8 @@ Returns all elements in the table that match the callback.
 ### zeo.get_distance(c_frame1, c_frame2)
 Returns the distance between the two given CFrame objects.
 
-### zeo.teleport_player(player, position)
-Teleports the player to the given position.
+### zeo.teleport_player(position)
+Teleports the client to the given position.
 
 ### zeo.get_players()
 Returns all players in the game.
