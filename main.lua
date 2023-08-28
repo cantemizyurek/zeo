@@ -76,6 +76,20 @@ local function get_nearest_player()
 	return get_nearest_player_to(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
 end
 
+local function get_objects_in_radius(c_frame, objects, radius)
+	local objects_in_radius = {}
+	table.foreach(objects, function(k, v)
+		if get_distance(c_frame, v.PrimaryPart.CFrame) <= radius then
+			table.insert(objects_in_radius, v)
+		end
+	end)
+	return objects_in_radius
+end
+
+local function get_players_in_radius(radius)
+	return get_objects_in_radius(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame, get_players(), radius)
+end
+
 return {
 	print_table = print_table,
 	find = find,
@@ -87,4 +101,6 @@ return {
 	get_player_by_display_name = get_player_by_display_name,
 	get_nearest_player_to = get_nearest_player_to,
 	get_nearest_player = get_nearest_player,
+	get_objects_in_radius = get_objects_in_radius,
+	get_players_in_radius = get_players_in_radius,
 }
