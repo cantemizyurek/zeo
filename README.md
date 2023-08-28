@@ -40,6 +40,9 @@ Returns the nearest player to the client.
 ### zeo.get_nearest_player_to(position)
 Returns the nearest player to the given position.
 
+### zeo.get_nearest_object_to(position, objects)
+Returns the nearest object to the given position.
+
 ### zeo.get_objects_in_radius(c_frame, objects, radius)
 Returns all objects in the given radius.
 
