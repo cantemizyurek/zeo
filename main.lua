@@ -56,16 +56,13 @@ local function get_player_by_display_name(player_display_name)
 	end)
 end
 
-local function get_nearest_player()
+local function get_nearest_player_to(c_frame)
 	local players = get_players()
 	local nearest_player = nil
 	local nearest_distance = math.huge
 
 	table.foreach(players, function(k, v)
-		local distance = get_distance(
-			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame,
-			v.Character.HumanoidRootPart.CFrame
-		)
+		local distance = get_distance(c_frame, v.Character.HumanoidRootPart.CFrame)
 		if distance < nearest_distance then
 			nearest_player = v
 			nearest_distance = distance
@@ -73,6 +70,10 @@ local function get_nearest_player()
 	end)
 
 	return nearest_player
+end
+
+local function get_nearest_player()
+	return get_nearest_player_to(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
 end
 
 return {
@@ -84,5 +85,6 @@ return {
 	get_players = get_players,
 	get_player_by_name = get_player_by_name,
 	get_player_by_display_name = get_player_by_display_name,
+	get_nearest_player_to = get_nearest_player_to,
 	get_nearest_player = get_nearest_player,
 }
