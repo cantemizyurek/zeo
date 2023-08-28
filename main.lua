@@ -72,7 +72,19 @@ local function get_nearest_object_to(c_frame, objects)
 end
 
 local function get_nearest_player_to(c_frame)
-	return get_nearest_object_to(c_frame, get_players())
+	local players = get_players()
+	local nearest_player = nil
+	local nearest_distance = math.huge
+
+	table.foreach(players, function(k, v)
+		local distance = get_distance(c_frame, v.Character.HumanoidRootPart.CFrame)
+		if distance < nearest_distance then
+			nearest_player = v
+			nearest_distance = distance
+		end
+	end)
+
+	return nearest_player
 end
 
 local function get_nearest_player()
@@ -90,7 +102,21 @@ local function get_objects_in_radius(c_frame, objects, radius)
 end
 
 local function get_players_in_radius(radius)
-	return get_objects_in_radius(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame, get_players(), radius)
+	local players = get_players()
+	local players_in_radius = {}
+
+	table.foreach(players, function(k, v)
+		if
+			get_distance(
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame,
+				v.Character.HumanoidRootPart.CFrame
+			) <= radius
+		then
+			table.insert(players_in_radius, v)
+		end
+	end)
+
+	return players_in_radius
 end
 
 return {
